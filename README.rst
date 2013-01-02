@@ -8,7 +8,7 @@ Jan 3, 2013::
 
     $ df -h
     Filesystem            Size  Used Avail Use% Mounted on
-    /dev/simfs             30G  7.8G   23G  26% /
+    /dev/simfs             30G  8.0G   23G  26% /
 
 Requirements:
 
