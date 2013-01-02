@@ -4,6 +4,9 @@ import json
 
 class TweetManager(models.Manager):
     def create_tweet(self, t):
+        if len(t.text) > 170:
+            raise ValueError("Text too long")
+
         if t.geo:
             geo = json.dumps(t.geo)
         else:
