@@ -12,6 +12,5 @@ Jan 3, 2013::
 
 Requirements:
 
-- `tweepy
-<https://github.com/tweepy/tweepy>`_.
+- https://github.com/tweepy/tweepy
 
