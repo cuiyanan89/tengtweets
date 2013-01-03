@@ -12,8 +12,8 @@ def home(request):
     log_path = os.path.join(settings.PROJECT_ROOT, 'logs/info.log')
     cmd = ['tail', '-n', '40', log_path]
     last_updates = subprocess.check_output(cmd)
-    newest_tweets_en = Tweet.objects.filter(iso_language_code='en')[:10]
-    newest_tweets_zh = Tweet.objects.filter(iso_language_code='zh')[:10]
+    newest_tweets_en = Tweet.objects.filter(iso_language_code='en').order_by("-id")[:10]
+    newest_tweets_zh = Tweet.objects.filter(iso_language_code='zh').order_by("-id")[:10]
     context = {
         'total_tweets': total_tweets,
         'last_updates': last_updates.replace('\n', '<br>'),
