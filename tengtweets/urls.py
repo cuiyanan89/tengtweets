@@ -6,8 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'tengtweets.views.home', name='home'),
     # url(r'^tengtweets/', include('tengtweets.foo.urls')),
-
+    url(r'^$', 'tengtweets.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
 )

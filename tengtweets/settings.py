@@ -1,6 +1,6 @@
 # Django settings for tengtweets project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 import os
