@@ -16,7 +16,7 @@ class TweetManager(models.Manager):
         else:
             geo = ''
         created_at = t.created_at.replace(tzinfo=utc)
-        tweet = self.model(
+        tweet, created = self.get_or_create(
             id = t.id,
             created_at = created_at,
             from_user = t.from_user,
@@ -30,8 +30,7 @@ class TweetManager(models.Manager):
             to_user_id = t.to_user_id or 0,
             to_user_name = t.to_user_name or '',
         )
-        tweet.save()
-        return True
+        return created
 
 
 class Tweet(models.Model):
