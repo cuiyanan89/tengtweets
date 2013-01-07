@@ -39,6 +39,6 @@ if __name__ == "__main__":
                         e, t.id, t.text
                         ))
             time.sleep(.5)
-        logger.info("saved %d tweets" % count)
+        logger.info("saved %d tweets (%d zh)" % (count, count_zh))
     else:
         execute_from_command_line(sys.argv)
