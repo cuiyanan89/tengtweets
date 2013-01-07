@@ -5,6 +5,8 @@ from tengtweets.tweets.utils import unescape
 
 class TweetManager(models.Manager):
     def create_tweet(self, t):
+        if self.filter(pk=t.id).exists():
+            return False
         text = unescape(t.text)
         if len(text) > 170:
             raise ValueError("Text too long")
@@ -29,6 +31,7 @@ class TweetManager(models.Manager):
             to_user_name = t.to_user_name or '',
         )
         tweet.save()
+        return True
 
 
 class Tweet(models.Model):
