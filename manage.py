@@ -19,7 +19,7 @@ if __name__ == "__main__":
             tweets = api.search(lang='zh', q='*', rpp=100)
             for t in tweets:
                 try:
-                    if (Tweet.objects.create_tweet(t))
+                    if (Tweet.objects.create_tweet(t)):
                         count += 1
                 except Exception, e:
                     logger_error.error("Error: %s id: %s text: %s" % (
@@ -30,7 +30,7 @@ if __name__ == "__main__":
             tweets = api.search(lang='en', q='*', rpp=100)
             for t in tweets:
                 try:
-                    if (Tweet.objects.create_tweet(t))
+                    if (Tweet.objects.create_tweet(t)):
                         count += 1
                 except Exception, e:
                     logger_error.error("Error: %s id: %s text: %s" % (
