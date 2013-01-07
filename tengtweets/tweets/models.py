@@ -5,7 +5,8 @@ from tengtweets.tweets.utils import unescape
 
 class TweetManager(models.Manager):
     def create_tweet(self, t):
-        if len(t.text) > 170:
+        text = unescape(t.text)
+        if len(text) > 170:
             raise ValueError("Text too long")
 
         if t.geo:
@@ -22,7 +23,7 @@ class TweetManager(models.Manager):
             geo = geo,
             iso_language_code = t.iso_language_code or '',
             source = t.source,
-            text = unescape(t.text),
+            text = text,
             to_user = t.to_user or '',
             to_user_id = t.to_user_id or 0,
             to_user_name = t.to_user_name or '',
