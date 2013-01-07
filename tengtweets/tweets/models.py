@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import utc
 import json
+from tengtweets.tweets.utils import unescape
 
 class TweetManager(models.Manager):
     def create_tweet(self, t):
@@ -21,7 +22,7 @@ class TweetManager(models.Manager):
             geo = geo,
             iso_language_code = t.iso_language_code or '',
             source = t.source,
-            text = t.text,
+            text = unescape(t.text),
             to_user = t.to_user or '',
             to_user_id = t.to_user_id or 0,
             to_user_name = t.to_user_name or '',

@@ -10,14 +10,16 @@ from tengtweets.tweets.models import Tweet
 def home(request):
     total_tweets = Tweet.objects.count()
     log_path = os.path.join(settings.PROJECT_ROOT, 'logs/info.log')
-    cmd = ['tail', '-n', '40', log_path]
+    cmd = ['tail', '-n', '10', log_path]
     last_updates = subprocess.check_output(cmd)
     newest_tweets_en = Tweet.objects.filter(iso_language_code='en').order_by("-id")[:10]
     newest_tweets_zh = Tweet.objects.filter(iso_language_code='zh').order_by("-id")[:10]
+    total_tweets_zh = Tweet.objects.filter(iso_language_code='zh').count()
     context = {
         'total_tweets': total_tweets,
         'last_updates': last_updates.replace('\n', '<br>'),
         'newest_tweets_zh': newest_tweets_zh,
         'newest_tweets_en': newest_tweets_en,
+        'total_tweets_zh': total_tweets_zh,
     }
     return render(request, 'tweets/home.html', context)
