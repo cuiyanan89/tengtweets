@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Search Tweets</h1>
+
+<form action="{% url "tweets_search" %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="q"/>
+    <input type="submit"/>
+</form>
+
+{% for t in tweets %}
+    {{ t.from_user }}: {{ t.text }}<br>
+{% endfor %}
+
+{% endblock %}

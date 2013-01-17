@@ -7,14 +7,4 @@
 <h3>Last Updates</h3>
 {{ last_updates|safe }}
 
-<h3>Newest Tweets</h3>
-{% for t in newest_tweets_zh %}
-    {{ t.from_user }}: {{ t.text }}<br>
-{% endfor %}
-
-<hr>
-{% for t in newest_tweets_en %}
-    {{ t.from_user }}: {{ t.text }}<br>
-{% endfor %}
-
 {% endblock %}

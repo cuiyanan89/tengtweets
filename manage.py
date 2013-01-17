@@ -16,7 +16,7 @@ if __name__ == "__main__":
         logger_error = logging.getLogger('error')
         count = 0
         count_zh = 0
-        for i in range(10):
+        for i in range(20):
             tweets = api.search(lang='zh', q='*', rpp=100)
             for t in tweets:
                 try:
@@ -27,18 +27,19 @@ if __name__ == "__main__":
                     logger_error.error("Error: %s id: %s text: %s" % (
                         e, t.id, t.text
                         ))
-            time.sleep(.5)
+            time.sleep(1)
 
-            tweets = api.search(lang='en', q='*', rpp=100)
-            for t in tweets:
-                try:
-                    if (Tweet.objects.create_tweet(t)):
-                        count += 1
-                except Exception, e:
-                    logger_error.error("Error: %s id: %s text: %s" % (
-                        e, t.id, t.text
-                        ))
-            time.sleep(.5)
+            if i % 5 == 0:
+                tweets = api.search(lang='en', q='*', rpp=100)
+                for t in tweets:
+                    try:
+                        if (Tweet.objects.create_tweet(t)):
+                            count += 1
+                    except Exception, e:
+                        logger_error.error("Error: %s id: %s text: %s" % (
+                            e, t.id, t.text
+                            ))
+                time.sleep(1)
         logger.info("saved %d tweets (%d zh)" % (count, count_zh))
     else:
         execute_from_command_line(sys.argv)
