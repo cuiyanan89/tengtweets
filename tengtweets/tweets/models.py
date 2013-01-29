@@ -49,5 +49,8 @@ class Tweet(models.Model):
 
     objects = TweetManager()
 
+    class Meta:
+        ordering = ["-created_at"]
+
     def __unicode__(self):
         return u"@%s: %s" % (self.from_user, self.text)
