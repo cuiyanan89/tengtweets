@@ -7,11 +7,17 @@ if __name__ == "__main__":
 
     from django.core.management import execute_from_command_line
     if len(sys.argv) == 2 and sys.argv[1] == "fetch":
+        import os
+        lock_file = '/tmp/tengtweets_fetch_lock.tmp'
+        if os.path.exists(lock_file):
+            exit(0)
+
         from tengtweets.tweets.models import Tweet
         from tweepy import api
         import logging
         import time
 
+        open(lock_file, 'w').close()
         logger = logging.getLogger('info')
         logger_error = logging.getLogger('error')
         count = 0
@@ -41,5 +47,7 @@ if __name__ == "__main__":
                             ))
                 time.sleep(1)
         logger.info("saved %d tweets (%d zh)" % (count, count_zh))
+        if os.path.exists(lock_file):
+            os.remove(lock_file)
     else:
         execute_from_command_line(sys.argv)
